@@ -12,22 +12,35 @@ import {
 import { theme } from "./colors";
 
 export default function App() {
-    const [selectedButton, setSelectedButton] = useState(null);
+    const [working, setWorking] = useState(true);
+    const travel = () => setWorking(false);
+    const work = () => setWorking(true);
+
     return (
         <View style={styles.container}>
             <Text>Open up App.js to start working on your app!</Text>
             <StatusBar style="auto" />
             <View style={styles.header}>
-                <TouchableOpacity>
-                    <Text style={styles.buttonText}>Work</Text>
+                <TouchableOpacity onPress={work}>
+                    <Text
+                        style={{
+                            ...styles.buttonText,
+                            color: working ? "white" : theme.grey,
+                        }}
+                    >
+                        Work
+                    </Text>
                 </TouchableOpacity>
-                <Pressable
-                    onPress={() => {
-                        console.log("23");
-                    }}
-                >
-                    <Text style={styles.buttonText}>Travel</Text>
-                </Pressable>
+                <TouchableOpacity onPress={travel}>
+                    <Text
+                        style={{
+                            ...styles.buttonText,
+                            color: working ? theme.grey : "white",
+                        }}
+                    >
+                        Travel
+                    </Text>
+                </TouchableOpacity>
             </View>
         </View>
     );
@@ -47,6 +60,5 @@ const styles = StyleSheet.create({
     buttonText: {
         fontSize: 38,
         fontWeight: "600",
-        color: theme.grey,
     },
 });
